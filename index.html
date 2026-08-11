@@ -399,17 +399,12 @@
 
     <div class="video-shell">
       <div class="video-frame" id="videoFrame">
-        <!--
-          У цього відео на YouTube вимкнене вбудовування (embedding), тому програти його
-          напряму в iframe не можна — YouTube віддає помилку 153. Поки що клік відкриває
-          відео в новій вкладці на YouTube. Якщо в YouTube Studio увімкнути
-          "Дозволити вбудовування" для цього відео, заміни цей блок на:
-          <iframe src="https://www.youtube-nocookie.com/embed/b56sJia6o-o" ...></iframe>
-        -->
+        <!-- Клік по play підміняє це на iframe і грає відео прямо тут (потрібне увімкнене
+             "Allow embedding" для відео в YouTube Studio, інакше YouTube поверне помилку 153). -->
         <img class="poster" src="https://img.youtube.com/vi/b56sJia6o-o/maxresdefault.jpg" alt="Прев'ю відео Dolyna">
-        <a class="play-btn" href="https://www.youtube.com/watch?v=b56sJia6o-o" target="_blank" rel="noopener" aria-label="Дивитись відео на YouTube">
+        <button class="play-btn" id="playBtn" aria-label="Відтворити відео">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-        </a>
+        </button>
         <div class="video-caption">
           <span>ЯК ЗНАЙТИ ГАРНИЙ ОФЕР У 2026</span>
           <span>DOLYNA</span>
@@ -610,6 +605,18 @@
 
     form.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  document.getElementById('playBtn').addEventListener('click', function(){
+    const frame = document.getElementById('videoFrame');
+    frame.innerHTML = `
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/b56sJia6o-o?autoplay=1&rel=0"
+        title="Dolyna VSL"
+        style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>`;
   });
 </script>
 
