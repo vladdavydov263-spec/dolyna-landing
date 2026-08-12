@@ -540,41 +540,7 @@
     </div>
 
     <div class="form-wrap">
-      <form id="leadForm">
-        <div class="field">
-          <label for="name">Ім'я</label>
-          <input type="text" id="name" name="name" placeholder="Як до тебе звертатись" required>
-        </div>
-        <div class="field">
-          <label for="phone">Телефон / Telegram</label>
-          <input type="tel" id="phone" name="phone" placeholder="+380 або @username" required>
-        </div>
-        <div class="field">
-          <label for="stack">Стек і рівень</label>
-          <input type="text" id="stack" name="stack" placeholder="Наприклад: Node.js, Middle" required>
-        </div>
-        <div class="field">
-          <label for="situation">Ситуація</label>
-          <select id="situation" name="situation" required>
-            <option value="" disabled selected>Обери, що ближче</option>
-            <option value="У пошуку">У пошуку</option>
-            <option value="Працюю, хочу більше">Працюю, хочу більше</option>
-            <option value="Потрібен другий фултайм">Потрібен другий фултайм</option>
-            <option value="Тільки заходжу в IT">Тільки заходжу в IT</option>
-          </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Залишити заявку</button>
-        <p class="form-micro">Без оплати і без зобов'язань. Номер потрібен рівно для того, щоб узгодити час.</p>
-      </form>
-
-      <div class="form-success" id="formSuccess">
-        <div class="check-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 12l4.5 4.5L18 8" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Заявку отримано</h3>
-        <p>Напишемо тобі в Telegram протягом дня, щоб узгодити зручний час.</p>
-      </div>
+      <div id="QRxcdazM" class="ss-landing" data-target="QRxcdazM" data-domain="dovbush"></div>
     </div>
   </div>
 </section>
@@ -584,33 +550,6 @@
 </footer>
 
 <script>
-  // Web App URL зі Google Apps Script (Deploy > New deployment > Web app).
-  // Поки порожній — заявки логуються в консоль, але на фронті все працює.
-  const FORM_ENDPOINT = "";
-
-  document.getElementById('leadForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const form = this;
-    const payload = Object.fromEntries(new FormData(form));
-
-    if (FORM_ENDPOINT) {
-      try {
-        await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // без preflight
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        console.error('Не вдалось надіслати заявку в Google Sheets:', err);
-      }
-    } else {
-      console.log('FORM_ENDPOINT не налаштований, заявка тільки в консолі:', payload);
-    }
-
-    form.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  });
-
   document.getElementById('playBtn').addEventListener('click', function(){
     const frame = document.getElementById('videoFrame');
     frame.innerHTML = `
@@ -623,6 +562,8 @@
       </iframe>`;
   });
 </script>
+
+<script src="https://customer.smartsender.eu/js/client/lp.min.js?v2.0.0"></script>
 
 </body>
 </html>
