@@ -104,8 +104,13 @@
     background:var(--blue);
     color:#fff;
     box-shadow:0 8px 30px -6px rgba(35,35,242,0.65);
+    animation:btn-pulse 2.4s ease-in-out infinite;
   }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px -6px rgba(35,35,242,0.8);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px -6px rgba(35,35,242,0.8);animation-play-state:paused;}
+  @keyframes btn-pulse{
+    0%, 100%{box-shadow:0 8px 30px -6px rgba(35,35,242,0.65);transform:translateY(0);}
+    50%{box-shadow:0 10px 42px -4px rgba(35,35,242,0.95);transform:translateY(-2px);}
+  }
   .btn-white{
     background:#fff;
     color:var(--blue);
@@ -136,8 +141,22 @@
   .hero-lead b{color:#fff;font-weight:700;}
   .hero-cta{margin-top:34px;}
 
+  .video-hint{
+    margin:44px 0 0;
+    font-family:'Unbounded',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.05em;
+    color:var(--blue-light);
+    animation:hint-bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes hint-bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(4px);}
+  }
+
   .video-shell{
-    margin-top:52px;
+    margin-top:14px;
     border-radius:22px;
     background:linear-gradient(150deg,#232326,#111113);
     border:1px solid rgba(255,255,255,0.08);
@@ -177,7 +196,44 @@
     transition:transform .15s ease;
   }
   .play-btn:hover{transform:scale(1.06);}
-  .play-btn svg{margin-left:5px;}
+  .play-btn svg{margin-left:5px;position:relative;z-index:2;}
+  .play-btn::before, .play-btn::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.7);
+    animation:ring-pulse 2.2s ease-out infinite;
+  }
+  .play-btn::after{animation-delay:1.1s;}
+  @keyframes ring-pulse{
+    0%{transform:scale(1);opacity:0.8;}
+    100%{transform:scale(1.9);opacity:0;}
+  }
+  .video-badge{
+    position:absolute;top:20px;left:20px;z-index:2;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(15,15,17,0.65);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:100px;
+    padding:9px 16px 9px 12px;
+    font-family:'Unbounded',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#fff;
+  }
+  .video-badge .rec-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--blue-light);
+    animation:rec-blink 1.6s ease-in-out infinite;
+  }
+  @keyframes rec-blink{
+    0%,100%{opacity:1;}
+    50%{opacity:0.25;}
+  }
   .video-caption{
     position:absolute;bottom:22px;left:26px;right:26px;
     display:flex;justify-content:space-between;align-items:flex-end;
@@ -395,10 +451,13 @@
       </a>
     </div>
 
+    <p class="video-hint">▼ Натисни play і подивись відео-розбір ринку 2026</p>
+
     <div class="video-shell">
       <div class="video-frame" id="videoFrame">
         <!-- Клік по play підміняє це на iframe і грає відео прямо тут (потрібне увімкнене
              "Allow embedding" для відео в YouTube Studio, інакше YouTube поверне помилку 153). -->
+        <div class="video-badge"><span class="rec-dot"></span>Відео</div>
         <img class="poster" src="https://img.youtube.com/vi/b56sJia6o-o/maxresdefault.jpg" alt="Прев'ю відео Dolyna">
         <button class="play-btn" id="playBtn" aria-label="Відтворити відео">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
